@@ -8,8 +8,9 @@ import java.time.LocalDateTime;
 @Controller
 public class BasicController {
     @GetMapping("/")
+    @ResponseBody
     String hello(){
-        return "index.html";
+        return "메인";
     }
 
     @GetMapping("/about")
