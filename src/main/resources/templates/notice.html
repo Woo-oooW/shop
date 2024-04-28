@@ -6,10 +6,16 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="/main.css" rel = "stylesheet">
 </head>
 <body>
 <div th:replace="~{nav.html::navbar}"></div>
 
-<h4>메인페이지임</h4>
+<div class="notice" th:each="i : ${notice}">
+    <div>
+        <h4 th:text="${i.title}">바지</h4>
+    </div>
+</div>
+
 </body>
 </html>
