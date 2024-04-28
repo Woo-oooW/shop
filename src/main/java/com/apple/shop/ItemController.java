@@ -1,12 +1,12 @@
 package com.apple.shop;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
 import javax.print.attribute.Attribute;
 import java.util.*;
 
@@ -36,12 +36,16 @@ public class ItemController {
     }
 
     @GetMapping("/detail/{id}")
-    String detail(@PathVariable Long id, Model model){
-        Optional<Item> result = itemRepository.findById(id);
-        if (result.isPresent()){
-            model.addAttribute("data",result.get());
-            System.out.println(result.get());
+    ResponseEntity<String> detail(@PathVariable Long id, Model model){
+        try {
+            throw new Exception("이런저런에러임");
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("니잘못임");
         }
-        return "detail.html";
+
+
+
     }
+
 }
