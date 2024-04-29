@@ -16,11 +16,11 @@ import java.util.*;
 public class ItemController {
 
     private final ItemRepository itemRepository;
+    private final ItemService itemService;
 
     @GetMapping("/list")
     String list(Model model){
-        List<Item> result = itemRepository.findAll();
-        model.addAttribute("items", result);
+        model.addAttribute("items", itemService.listItem());
         return "list.html";
     }
 
@@ -30,22 +30,28 @@ public class ItemController {
     }
 
     @PostMapping("/add")
-    String addPost(@ModelAttribute Item item){
-        itemRepository.save(item);
+    String addPost(String title, Integer price){
+        itemService.saveItem(title, price);
         return "redirect:/list";
     }
 
+    @GetMapping("/edit/{id}")
+    String preEdit(@PathVariable Long id, Model model){
+        model.addAttribute("data",itemService.preEditItem(id));
+        return "edit.html";
+    }
+
+    @PostMapping("/edit/save")
+    String edit(Long id, String title, Integer price){
+        itemService.editItem(id,title,price);
+        return "redirect:/edit/" +id;
+    }
+
+
     @GetMapping("/detail/{id}")
-    ResponseEntity<String> detail(@PathVariable Long id, Model model){
-        try {
-            throw new Exception("이런저런에러임");
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("니잘못임");
-        }
-
-
-
+    String detail(@PathVariable Long id, Model model){
+        model.addAttribute("data",itemService.detailItem(id));
+        return "detail.html";
     }
 
 }
