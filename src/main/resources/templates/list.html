@@ -18,8 +18,20 @@
             <a th:href=" '/detail/' + ${i.id} "><h4 th:text="${i.title}">바지</h4></a>
             <p th:text="${ i.price }  + '원' ">7억</p>
             <a th:href=" '/edit/'  + ${i.id} "><button>수정</button></a>
+            <a th:href=" '/del/'  + ${i.id} "><button>삭제</button></a>
+            <button th:onclick="fetchid([[${i.id}]])">Ajax삭제</button>
         </div>
     </div>
+<script>
+    function fetchid(paramid)
+    {
+        fetch('/PostDel',{
+        method : 'POST',
+        headers :{ 'Content-Type' : 'application/json' },
+        body : JSON.stringify({id : paramid })
+        })
+    }
 
+</script>
 </body>
 </html>

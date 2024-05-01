@@ -40,5 +40,9 @@ public class ItemService {
         itemRepository.save(result);
     }
 
-
+    public Object delItem(Long id){
+        var result = itemRepository.findById(id).orElseThrow();
+        itemRepository.delete(result);
+        return null;
+    }
 }
