@@ -1,4 +1,4 @@
-package com.apple.shop;
+package com.apple.shop.Item;
 
 import jakarta.persistence.*;
 import lombok.Getter;

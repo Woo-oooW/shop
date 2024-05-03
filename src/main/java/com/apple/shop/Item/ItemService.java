@@ -1,4 +1,4 @@
-package com.apple.shop;
+package com.apple.shop.Item;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
