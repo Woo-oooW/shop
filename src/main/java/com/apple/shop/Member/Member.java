@@ -1,9 +1,6 @@
 package com.apple.shop.Member;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,7 +11,10 @@ import lombok.ToString;
 @Setter
 public class Member {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(unique = true)
     public String username;
     public String password;
-    public String displayname;
+    public String displaynm;
 }

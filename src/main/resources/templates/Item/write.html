@@ -9,15 +9,13 @@
     <link href="/main.css" rel = "stylesheet">
 </head>
 <body>
-<div th:replace="~{nav.html::navbar}"></div>
+<div th:replace="~{HtmlSource/nav.html::navbar}"></div>
 
-<form action="/edit/save" method="POST">
-    ID<input name="id" th:value = "${data.id}" style="display : none">
-    품명<input name="title" th:value = "${data.title}">
-    가격<input name="price" th:value = "${data.price}">
+<form action="/add" method="POST">
+    <input name="title">
+    <input name="price">
     <button type="submit">전송</button>
 </form>
-
 
 </body>
 </html>

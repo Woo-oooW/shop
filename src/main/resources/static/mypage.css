@@ -9,7 +9,7 @@ body {
     height: 100vh;
 }
 
-.login-container {
+.info-container {
     background-color: #fff;
     border-radius: 8px;
     padding: 20px;
@@ -29,8 +29,8 @@ label {
     margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="password"],
+input[type="id"],
+input[type="username"],
 input[type="displaynm"]
  {
     width: 90%;
@@ -38,19 +38,4 @@ input[type="displaynm"]
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-}
-
-input[type="submit"] {
-    width: 98%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #0056b3;
 }

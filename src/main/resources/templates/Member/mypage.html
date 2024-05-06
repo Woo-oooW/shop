@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="/mypage.css" rel = "stylesheet">
+</head>
+<body>
+<div class="info-container">
+    <h2>MyPage</h2>
+    <div class="form-group">
+        <label for="id">Id</label>
+        <input type="id" id="id" name="id" disabled>
+    </div>
+    <div class="form-group">
+        <label for="displaynm">NickName</label>
+        <input type="displaynm" id="displaynm" name="displaynm" disabled>
+    </div>
+    <div sec:authentication = "principal"></div>
+
+</div>
+</body>
+</html>
