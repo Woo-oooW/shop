@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,12 +30,21 @@ public class MyUserDetailsService implements UserDetailsService {
         var user = result.get();
         List<GrantedAuthority> userRole = new ArrayList<>();
         userRole.add(new SimpleGrantedAuthority("일반유저"));
+        var customUser = new CustomUser(user.getUsername(), user.getPassword(), userRole);
+        customUser.displayName = user.getDisplaynm();
 
-        return new User(user.getUsername(), user.getPassword(), userRole);
-
-
-//        DB에서 username을 가진 유저를 찾아와서
-//        return new User(유저아이디, 비번, 권한) 해주세요
+        return customUser;
     }
 
+}
+
+class CustomUser extends User {
+    public String displayName;
+        public CustomUser(
+            String username,
+            String password,
+            Collection<? extends GrantedAuthority> authorities
+    ) {
+        super(username, password, authorities);
+    }
 }
