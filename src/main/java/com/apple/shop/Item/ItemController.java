@@ -1,6 +1,8 @@
 package com.apple.shop.Item;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,14 @@ public class ItemController {
     @GetMapping("/list")
     String list(Model model){
         model.addAttribute("items", itemService.listItem());
+        return "item/list.html";
+    }
+
+    @GetMapping("/list/page/{g_num}")
+    String getListPage(Model model,@PathVariable Integer g_num) {
+        Page<Item> result = itemRepository.findPageBy(PageRequest.of(g_num-1,2));
+        model.addAttribute("items", result);
+        model.addAttribute("pageNumber", g_num);
         return "item/list.html";
     }
 

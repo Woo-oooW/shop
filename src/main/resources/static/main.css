@@ -35,6 +35,19 @@ button {
  color : white;
  border : none;
 }
+
+.btn
+{
+ background : black;
+ color : white;
+ border : none;
+padding : 8px 13px;
+ margin-top : 5px;
+ border : 1px solid grey;
+ border-radius : 4px;
+ vertical-align : middle;
+}
+
 input {
  display : block;
 }

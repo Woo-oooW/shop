@@ -22,6 +22,14 @@
             <button th:onclick="fetchid([[${i.id}]])">Ajax삭제</button>
         </div>
     </div>
+
+<div class="pageBtn">
+    <a class="btn" th:if="${items.number > 0}" th:href="${pageNumber} - 1">&lt;&lt;</a>
+    <span th:text="${pageNumber}"></span>
+    <span>/</span>
+    <span th:text="${items.totalPages}"></span>
+    <a class="btn" th:if="${pageNumber < items.totalPages}" th:href="${pageNumber} + 1">&gt;&gt;</a>
+</div>
 <script>
     function fetchid(paramid)
     {
@@ -31,7 +39,6 @@
         body : JSON.stringify({id : paramid })
         })
     }
-
 </script>
 </body>
 </html>
