@@ -44,7 +44,6 @@ public class MemberController {
     public MemberDto getUser(){
         var a = memberRepository.findById(1L);
         var result = a.get();
-        System.out.println(result);
         var data = new MemberDto(result.getUsername(),result.getDisplaynm());
         return data;
     }

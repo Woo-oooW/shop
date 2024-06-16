@@ -22,12 +22,12 @@ public class ItemController {
     @GetMapping("/list")
     String list(Model model){
         model.addAttribute("items", itemService.listItem());
-        return "item/list.html";
+        return "item/list/page/1.html";
     }
 
     @GetMapping("/list/page/{g_num}")
     String getListPage(Model model,@PathVariable Integer g_num) {
-        Page<Item> result = itemRepository.findPageBy(PageRequest.of(g_num-1,2));
+        Page<Item> result = itemRepository.findPageBy(PageRequest.of(g_num-1,3));
         model.addAttribute("items", result);
         model.addAttribute("pageNumber", g_num);
         return "item/list.html";
@@ -40,8 +40,9 @@ public class ItemController {
 
     @PostMapping("/add")
     String addPost(String title, Integer price){
+        //마지막 페이지로 이동하게 수정하기
         itemService.saveItem(title, price);
-        return "redirect:/list";
+        return "redirect:/list/page/1";
     }
 
     @GetMapping("/detail/{id}")
@@ -63,13 +64,13 @@ public class ItemController {
             throw new Exception();
         }
         itemService.editItem(id,title,price);
-        return "redirect:/list";
+        return "redirect:/list/page/1";
     }
 
     @GetMapping("/del/{id}")
     String delPost(@PathVariable Long id, Model model){
         model.addAttribute("data",itemService.delItem(id));
-        return "redirect:/list";
+        return "redirect:/list/page/1";
     }
 
     @PostMapping("/PostDel")
@@ -77,7 +78,7 @@ public class ItemController {
         int iid = (int) body.get("id");
         Long id = (long) iid;
         model.addAttribute("data",itemService.delItem(id));
-        return "redirect:/list";
+        return "redirect:/list/page/1";
     }
 
 

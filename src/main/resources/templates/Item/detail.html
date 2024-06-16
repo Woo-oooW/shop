@@ -17,6 +17,12 @@
 
     <h4 th:text = "${data.title}"></h4>
     <p th:text = "${data.price}"></p>
+
+    <form action = "comment" method="POST">
+        <input name="ment">
+        <button type="submit">전송</button>
+
+    </form>
 </div>
 </body>
 </html>

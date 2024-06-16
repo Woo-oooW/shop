@@ -38,7 +38,7 @@ public class SecurityConfig {
                 authorize.requestMatchers("/**").permitAll()
         );
         http.formLogin((formLogin) -> formLogin.loginPage("/login")
-                .defaultSuccessUrl("/list")
+                .defaultSuccessUrl("/list/page/1")
                 .failureUrl("/main"));
         http.logout(logout -> logout.logoutUrl("/logout"));
         return http.build();

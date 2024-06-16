@@ -17,5 +17,16 @@
     <button type="submit">전송</button>
 </form>
 
+<input tyhpe="file" onchange="getURL(this)">
+
+<script>
+    function getURL(e)
+    {
+    console.log(e.files[0].name);
+    fetch('/presigned-url')
+    }
+
+</script>
+
 </body>
 </html>
