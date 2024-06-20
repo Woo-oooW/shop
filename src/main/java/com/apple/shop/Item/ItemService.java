@@ -16,6 +16,11 @@ public class ItemService {
         return result;
     }
 
+    public Object listSearchItem(String SearchItem){
+        List<Item> result = itemRepository.findAllByTitleContains(SearchItem);
+        return result;
+    }
+
     public Object detailItem(Long id){
         Optional<Item> result = itemRepository.findById(id);
         return result.get();

@@ -1,5 +1,6 @@
 package com.apple.shop.Item;
 
+import com.apple.shop.comment.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,19 +19,30 @@ public class ItemController {
 
     private final ItemRepository itemRepository;
     private final ItemService itemService;
+    private final CommentRepository commentRepository;
 
     @GetMapping("/list")
     String list(Model model){
-        model.addAttribute("items", itemService.listItem());
-        return "item/list/page/1.html";
+//        model.addAttribute("items", itemService.listItem());
+//        return "item/list/page/1.html";
+        return "redirect:/list/page/1";
+
     }
 
     @GetMapping("/list/page/{g_num}")
     String getListPage(Model model,@PathVariable Integer g_num) {
         Page<Item> result = itemRepository.findPageBy(PageRequest.of(g_num-1,3));
+        System.out.println(result);
         model.addAttribute("items", result);
         model.addAttribute("pageNumber", g_num);
         return "item/list.html";
+    }
+
+    @PostMapping("/search")
+    String postSearch(@RequestParam String searchText, Model model) {
+        var result = itemService.listSearchItem(searchText);
+        model.addAttribute("items", result);
+        return "item/slist.html";
     }
 
     @GetMapping("/write")
@@ -48,6 +60,7 @@ public class ItemController {
     @GetMapping("/detail/{id}")
     String detail(@PathVariable Long id, Model model){
         model.addAttribute("data",itemService.detailItem(id));
+        model.addAttribute("comments",commentRepository.findAllByParentId(id));
         return "item/detail.html";
     }
 
@@ -64,13 +77,13 @@ public class ItemController {
             throw new Exception();
         }
         itemService.editItem(id,title,price);
-        return "redirect:/list/page/1";
+        return "redirect:/list";
     }
 
     @GetMapping("/del/{id}")
     String delPost(@PathVariable Long id, Model model){
         model.addAttribute("data",itemService.delItem(id));
-        return "redirect:/list/page/1";
+        return "redirect:/list";
     }
 
     @PostMapping("/PostDel")
@@ -78,7 +91,7 @@ public class ItemController {
         int iid = (int) body.get("id");
         Long id = (long) iid;
         model.addAttribute("data",itemService.delItem(id));
-        return "redirect:/list/page/1";
+        return "redirect:/list";
     }
 
 
