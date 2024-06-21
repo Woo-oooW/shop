@@ -13,16 +13,31 @@
 
 <div class="detail">
     <h4>상세페이지</h4>
-    <img src="https://via.placeholder.com/300">
+    <img src="https://placeholder.pics/svg/300x300">
 
     <h4 th:text = "${data.title}"></h4>
     <p th:text = "${data.price}"></p>
 
-    <form action = "comment" method="POST">
-        <input name="ment">
-        <button type="submit">전송</button>
-
+    <form action="/order" method="POST">
+        <input name ="title" th:value="${data.title}">
+        <input name ="price" th:value="${data.price}">
+        <input name ="count" placeholder="count">
+        <button style="text-align: left">주문하기</button>
     </form>
+
+
+
+    <form action = "/comment" method="POST" style="display: flex">
+        <input name="content">
+        <input name="parent" th:value="${data.id}" style="display: none">
+        <button type="submit">전송</button>
+    </form>
+
+
+</div>
+
+<div class="cmmlist" th:each="i : ${comments}">
+    <p th:text="'ID : ' + ${ i.username } + '  내용 : ' + ${ i.content } ">
 </div>
 </body>
 </html>

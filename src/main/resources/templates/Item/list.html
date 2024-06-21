@@ -12,8 +12,13 @@
 <div th:replace="~{HtmlSource/nav.html::navbar}"></div>
 
 
+<form action="/search" method="POST">
+    <input name="searchText" style="display: inline">
+    <button>검색</button>
+
+</form>
     <div class="card" th:each="i : ${items}">
-        <img src="https://via.placeholder.com/300">
+        <img src="https://placeholder.pics/svg/300x300">
         <div>
             <a th:href=" '/detail/' + ${i.id} "><h4 th:text="${i.title}">바지</h4></a>
             <p th:text="${ i.price }  + '원' ">7억</p>

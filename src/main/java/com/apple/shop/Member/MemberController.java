@@ -52,6 +52,7 @@ public class MemberController {
 class MemberDto{
     public String username;
     public String displayName;
+    public Long memberId;
     MemberDto(String a, String b){
         this.username = a;
         this.displayName = b;
@@ -60,6 +61,6 @@ class MemberDto{
     MemberDto(String a, String b, Long id){
         this.username = a;
         this.displayName = b;
-
+        this.memberId = id;
     }
 }
