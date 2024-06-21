@@ -8,6 +8,7 @@ import java.util.Collection;
 
 public class CustomUser extends User {
     public String displayName;
+    public Long memberId;
     public CustomUser(
             String username,
             String password,

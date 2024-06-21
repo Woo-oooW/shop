@@ -29,7 +29,7 @@ public class CommentController {
         data.setUsername(user.getUsername());
         data.setParentId(parent);
         commentRepository.save(data);
-        return "redirect:/list";
+        return "redirect:/detail/" + parent;
     }
     
     //후에 페이지네이션

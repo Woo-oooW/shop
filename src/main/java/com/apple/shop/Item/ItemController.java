@@ -23,16 +23,12 @@ public class ItemController {
 
     @GetMapping("/list")
     String list(Model model){
-//        model.addAttribute("items", itemService.listItem());
-//        return "item/list/page/1.html";
         return "redirect:/list/page/1";
-
     }
 
     @GetMapping("/list/page/{g_num}")
     String getListPage(Model model,@PathVariable Integer g_num) {
         Page<Item> result = itemRepository.findPageBy(PageRequest.of(g_num-1,3));
-        System.out.println(result);
         model.addAttribute("items", result);
         model.addAttribute("pageNumber", g_num);
         return "item/list.html";
@@ -52,9 +48,9 @@ public class ItemController {
 
     @PostMapping("/add")
     String addPost(String title, Integer price){
-        //마지막 페이지로 이동하게 수정하기
         itemService.saveItem(title, price);
-        return "redirect:/list/page/1";
+        Page<Item> result = itemRepository.findPageBy(PageRequest.of(1,3));
+        return "redirect:/list/page/" + result.getTotalPages();
     }
 
     @GetMapping("/detail/{id}")
