@@ -11,7 +11,7 @@
 
 
     function getMypage(){
-    fetch('mypage/jwt')
-        .then(() => r.text())
+        fetch('mypage/jwt')
+        .then((r) => r.text())
         .then((r => {console.log(r)}))
     }

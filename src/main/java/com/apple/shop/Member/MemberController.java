@@ -2,6 +2,7 @@ package com.apple.shop.Member;
 
 import com.apple.shop.Config.JwtUtil;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -61,9 +62,15 @@ public class MemberController {
 
     @GetMapping("/mypage/jwt")
     @ResponseBody
-    String mypageJWT(){
+    String mypageJWT(Authentication auth) {
 
-        return "item/list.html";
+        var user = (CustomUser) auth.getPrincipal();
+        System.out.println(user);
+        System.out.println(user.displayName);
+        System.out.println(user.getAuthorities());
+        System.out.println(user.getPassword());
+
+        return "마이페이지 데이터";
     }
 
 
