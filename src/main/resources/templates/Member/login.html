@@ -5,23 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link href="/login.css" rel = "stylesheet">
+    <script type="text/javascript" src="/login.js"></script>
 </head>
 <body>
 <div class="login-container">
     <h2>Login</h2>
-    <form action="/login" method="post">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Login">
-        </div>
+<!--    <form action="/login" method="post">-->
+<!--        <div class="form-group">-->
+<!--            <label for="username">Username</label>-->
+<!--            <input type="text" id="username" name="username" placeholder="Username" required>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="password">Password</label>-->
+<!--            <input type="password" id="password" name="password" placeholder="Password" required>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <input type="submit" value="Login">-->
+<!--        </div>-->
+<!--    </form>-->
+
+    <form>
+        <input name="username" id ="username">
+        <input name="password" type="password" id = "password">
     </form>
+    <button onclick="loginJWT()">전송</button>
+
+    <button onclick="getMypage()">JWT btn</button>
+
+
+
 </div>
 </body>
 </html>
