@@ -31,19 +31,19 @@ public class ItemController {
         Page<Item> result = itemRepository.findPageBy(PageRequest.of(g_num-1,3));
         model.addAttribute("items", result);
         model.addAttribute("pageNumber", g_num);
-        return "item/list.html";
+        return "Item/list";
     }
 
     @PostMapping("/search")
     String postSearch(@RequestParam String searchText, Model model) {
         var result = itemService.listSearchItem(searchText);
         model.addAttribute("items", result);
-        return "item/slist.html";
+        return "Item/slist";
     }
 
     @GetMapping("/write")
     String write(){
-        return "item/write.html";
+        return "Item/write";
     }
 
     @PostMapping("/add")
@@ -57,13 +57,13 @@ public class ItemController {
     String detail(@PathVariable Long id, Model model){
         model.addAttribute("data",itemService.detailItem(id));
         model.addAttribute("comments",commentRepository.findAllByParentId(id));
-        return "item/detail.html";
+        return "Item/detail";
     }
 
     @GetMapping("/edit/{id}")
     String preEdit(@PathVariable Long id, Model model){
         model.addAttribute("data",itemService.preEditItem(id));
-        return "item/edit.html";
+        return "Item/edit";
     }
 
     @PostMapping("/edit/save")

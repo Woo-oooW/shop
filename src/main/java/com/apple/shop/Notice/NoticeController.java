@@ -19,6 +19,6 @@ public class NoticeController {
         List<Notice> result = noticeRepository.findAll();
 
         model.addAttribute("notice", result);
-        return "notice.html";
+        return "notice";
     }
 }

@@ -29,13 +29,13 @@ public class MemberController {
     @GetMapping("/main")
     String main()
     {
-         return "Member/login.html";
+         return "Member/login";
     }
 
     @GetMapping("/join")
     String join()
     {
-        return "Member/join.html";
+        return "Member/join";
     }
 
     @PostMapping("/new")
@@ -48,7 +48,7 @@ public class MemberController {
     String myPage(Authentication auth)
     {
         CustomUser result = (CustomUser) auth.getPrincipal();
-        return "Member/mypage.html";
+        return "Member/mypage";
     }
 
     @GetMapping("/user/1")
