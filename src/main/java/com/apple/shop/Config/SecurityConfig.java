@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         );
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/login/**", "/css/**", "/js/**", "/images/**","favicon.ico").permitAll() // 정적 리소스와 메인 페이지 접근 허용
+                .requestMatchers("/join","new","/login/**", "/css/**", "/js/**", "/images/**","favicon.ico").permitAll() // 정적 리소스와 메인 페이지 접근 허용
                 .requestMatchers("/list").authenticated()
                 .anyRequest().authenticated()
         );

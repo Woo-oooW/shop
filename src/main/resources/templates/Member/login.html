@@ -10,25 +10,12 @@
 <body>
 <div class="login-container">
     <h2>Login</h2>
-<!--    <form action="/login" method="post">-->
-<!--        <div class="form-group">-->
-<!--            <label for="username">Username</label>-->
-<!--            <input type="text" id="username" name="username" placeholder="Username" required>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="password">Password</label>-->
-<!--            <input type="password" id="password" name="password" placeholder="Password" required>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <input type="submit" value="Login">-->
-<!--        </div>-->
-<!--    </form>-->
-
     <form>
-        <input name="username" id ="username">
-        <input name="password" type="password" id = "password">
+        <input name="username" type="text" id ="username" placeholder="Username">
+        <input name="password" type="password" id = "password" placeholder="Password">
     </form>
-    <button onclick="loginJWT()">로그인</button>
+    <button onclick="loginJWT()">Login</button>
+    <button onclick="join()">Join</button>
 </div>
 </body>
 </html>

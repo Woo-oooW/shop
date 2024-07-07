@@ -10,7 +10,6 @@
         .then(response => response.text())
         .then(jwt => {
             // JWT를 받은 후 처리할 로직
-            console.log("Received JWT:", jwt);
             document.cookie = `jwt=${jwt}; Max-Age=1000; Path=/`; // JWT를 쿠키에 저장
             window.location.replace('/list'); // list 페이지로 리다이렉트
         })
@@ -18,4 +17,8 @@
             console.error('Error during login:', error);
             alert('로그인에 실패했습니다. 다시 시도해 주세요.');
         });
+    }
+
+    function join(){
+                window.location.replace('/join'); // list 페이지로 리다이렉트
     }
