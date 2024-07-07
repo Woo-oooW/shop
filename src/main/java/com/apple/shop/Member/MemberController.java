@@ -26,10 +26,22 @@ public class MemberController {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    @GetMapping("/main")
-    String main()
-    {
-         return "Member/login";
+
+    @GetMapping("/login")
+    public String main(HttpServletRequest request, HttpServletResponse response) {
+        // 기존에 존재하는 JWT 쿠키 삭제
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("jwt")) {
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                    break;
+                }
+            }
+        }
+        // 로그인 페이지로 이동
+        return "Member/login";
     }
 
     @GetMapping("/join")
@@ -41,7 +53,7 @@ public class MemberController {
     @PostMapping("/new")
     String newJoin(String username, String password, String displaynm){
         memberService.joinMember(username, password, displaynm);
-        return "redirect:/main";
+        return "redirect:/login";
     }
 
     @GetMapping("/my-page")
@@ -51,36 +63,23 @@ public class MemberController {
         return "Member/mypage";
     }
 
-    @GetMapping("/user/1")
+    @GetMapping("/user")
     @ResponseBody
-    public MemberDto getUser(){
-        var a = memberRepository.findById(1L);
+    public MemberDto getUser(Authentication auth){
+
+        var userinfo = (CustomUser) auth.getPrincipal();
+
+        var a = memberRepository.findById(userinfo.getMemberId());
         var result = a.get();
-        var data = new MemberDto(result.getUsername(),result.getDisplaynm());
+        var data = new MemberDto(result.getUsername(),result.getDisplaynm(), result.getId());
         return data;
     }
-
-    @GetMapping("/mypage/jwt")
-    @ResponseBody
-    String mypageJWT(Authentication auth) {
-
-        var user = (CustomUser) auth.getPrincipal();
-        System.out.println(user);
-        System.out.println(user.displayName);
-        System.out.println(user.getAuthorities());
-        System.out.println(user.getPassword());
-
-        return "마이페이지 데이터";
-    }
-
-
 
     @PostMapping("/login/jwt")
     @ResponseBody
     public String loginJWT(@RequestBody Map<String, String> data
     ,HttpServletResponse response) {
-        System.out.println(data.get("username"));
-        System.out.println(data.get("password"));
+
         var authToken = new UsernamePasswordAuthenticationToken(
                 data.get("username"), data.get("password")
         );
@@ -89,10 +88,9 @@ public class MemberController {
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         var jwt = JwtUtil.createToken(SecurityContextHolder.getContext().getAuthentication());
-        System.out.println(jwt);
 
         var cookie = new Cookie("jwt",jwt);
-        cookie.setMaxAge(10);
+        cookie.setMaxAge(1000);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         response.addCookie(cookie);

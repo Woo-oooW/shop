@@ -23,22 +23,17 @@ public class JwtUtil {
     // JWT 만들어주는 함수
     public static String createToken(Authentication auth) {
         CustomUser user = (CustomUser) auth.getPrincipal();
-        System.out.println("auth.getauthorities 출력");
-        System.out.println(auth.getAuthorities());
+
         var authorities = auth.getAuthorities().stream().map(a -> a.getAuthority()).collect(Collectors.joining(","));
-        System.out.println("getusername 출력");
-        System.out.println(user.getUsername());
         String jwt = Jwts.builder()
                 .claim("username", user.getUsername())
                 .claim("displayName", user.displayName)
+                .claim("memberId",user.memberId)
                 .claim("authorities",user.getAuthorities())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 10000)) //유효기간 10초
+                .expiration(new Date(System.currentTimeMillis() + 1000000)) //유효기간 10초
                 .signWith(key)
                 .compact();
-
-        System.out.println("jwt생성결과");
-        System.out.println(jwt);
         return jwt;
     }
 

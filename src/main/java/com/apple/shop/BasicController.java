@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class BasicController {
     @GetMapping("/")
     String main(){
-        return "redirect:/main";
+        return "redirect:/login";
     }
 }
 

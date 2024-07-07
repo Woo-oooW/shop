@@ -33,6 +33,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        System.out.println("ㅌㅌ");
         http.csrf((csrf) -> csrf.disable());
 //        http.csrf(csrf -> csrf.csrfTokenRepository(csrfTokenRepository()) //CSRF 추가
 //                .ignoringRequestMatchers("/login")
@@ -40,13 +41,15 @@ public class SecurityConfig {
         http.sessionManagement((session) -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         );
-        http.authorizeHttpRequests((authorize) ->
-                authorize.requestMatchers("/**").permitAll()
+        http.authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers("/login/**", "/css/**", "/js/**", "/images/**","favicon.ico").permitAll() // 정적 리소스와 메인 페이지 접근 허용
+                .requestMatchers("/list").authenticated()
+                .anyRequest().authenticated()
         );
         http.addFilterBefore(new JwtFilter(), ExceptionTranslationFilter.class);
-//        http.formLogin((formLogin) -> formLogin.loginPage("/login")
-//                .defaultSuccessUrl("/list/page/1")
-//                .failureUrl("/main"));
+        http.formLogin((formLogin) -> formLogin.loginPage("/login")
+                .defaultSuccessUrl("/list")
+                .failureUrl("/login"));
         http.logout(logout -> logout.logoutUrl("/logout"));
         return http.build();
     }
