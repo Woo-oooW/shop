@@ -21,7 +21,15 @@ public class CustomUser extends User {
         return memberId;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
     public void setMemberId(Long memberId) {
         this.memberId = memberId;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 }

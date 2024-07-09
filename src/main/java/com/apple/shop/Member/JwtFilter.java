@@ -53,6 +53,8 @@ public class JwtFilter extends OncePerRequestFilter {
                 Long memberId = memberIdDouble != null ? memberIdDouble.longValue() : null; //Long으로 넣어줌
 
                 customUser.setMemberId(memberId);
+                customUser.setDisplayName(claims.get("displayName", String.class));
+
 
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         customUser, null, authorities
@@ -62,7 +64,6 @@ public class JwtFilter extends OncePerRequestFilter {
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-                System.out.println(SecurityContextHolder.getContext());
             } catch (Exception e) {
                 System.out.println("ERROR ERROR ERROR ERROR ERROR ERROR : " + e.getMessage());
                 SecurityContextHolder.clearContext();

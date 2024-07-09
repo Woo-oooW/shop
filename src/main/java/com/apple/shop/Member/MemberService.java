@@ -13,8 +13,12 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public Object memberInfo(String username){
+    public Object memberInfoName(String username){
         var result = memberRepository.findByUsername(username);
+        return result;
+    }
+    public Object memberInfoId(Long memberId){
+        var result = memberRepository.findById(memberId);
         return result;
     }
 

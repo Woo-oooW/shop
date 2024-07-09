@@ -5,7 +5,6 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -68,10 +67,7 @@ public class MemberController {
     public MemberDto getUser(Authentication auth){
 
         var userinfo = (CustomUser) auth.getPrincipal();
-
-        var a = memberRepository.findById(userinfo.getMemberId());
-        var result = a.get();
-        var data = new MemberDto(result.getUsername(),result.getDisplaynm(), result.getId());
+        var data = new MemberDto(userinfo.getUsername(), userinfo.getDisplayName(), userinfo.getMemberId());
         return data;
     }
 
