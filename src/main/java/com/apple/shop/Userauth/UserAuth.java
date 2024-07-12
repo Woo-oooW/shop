@@ -18,6 +18,7 @@ public class UserAuth {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long memberId;
+    private Long authType;
     private String authName;
     @CreationTimestamp
     private LocalDateTime created;
